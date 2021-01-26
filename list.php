@@ -59,7 +59,7 @@ $member = $members->fetch();
   <div id="head">
     <h1><br><br>実績確認</h1>
   </div>
-    <h3>表示条件：</h3>
+<!--     <h3>表示条件：</h3>
     <form action="" method="post">
       <table>
         <tr>
@@ -73,7 +73,7 @@ $member = $members->fetch();
         </table>
         <input type="submit" value="検索">
         <br>
-      </form>
+      </form> -->
       <br>
       <?php
       $sql = 'SELECT report_id, member_code, machine_code, parts_code, production_num, start_time, finish_time, lunch_time, breakdown_time, breakdown_reason, comment FROM reports 
