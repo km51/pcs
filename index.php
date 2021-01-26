@@ -1,7 +1,7 @@
 <?php
 session_start();
 require('dbconnect.php');
-ini_set('display_errors', 'on');
+ini_set('display_errors', 'o');
 
 if (isset($_SESSION['member_id']) && $_SESSION['time'] + 3600 > time()){
   $_SESSION['time'] = time();
