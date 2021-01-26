@@ -10,7 +10,9 @@ Herokuでデプロイしました。[PCS](https://pcs51.herokuapp.com/login.php)
 * 写真をアップロード  
 * ログイン  
 * ログアウト  
-* ページネーション  
+* ページネーション 
+* CSV出力
+*
 ## 環境  
 * 言語 : PHP 8.0.0
 * DB : MariaDB 10.4.17
