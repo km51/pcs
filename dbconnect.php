@@ -2,7 +2,7 @@
 try{
 // 例外処理
 
-    $db = new PDO('mysql:dbname=pcs;host=127.0.0.1;charset=utf8', 'root', '_*n7PACtL7qKM#4');
+    $db = new PDO('mysql:dbname=heroku_1572927894d2baf;host=us-cdbr-east-03.cleardb.com;charset=utf8', 'b20f2cba5b89cc', 'b601a40c');
     // DBに接続できるようになった。
 
 }catch(PDOException $e){
