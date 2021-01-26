@@ -1,7 +1,7 @@
 # Production Control System 
 PHPの学習成果物として、生産管理システムを作成しました。
   
-Herokuでデプロイしました。[Production Control System（Heroku）]()【登録社員コード：1234 / 登録パスワード：4321】
+Herokuでデプロイ予定です。
 
 ## 基本機能
 * 文章の投稿  
