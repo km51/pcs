@@ -1,7 +1,7 @@
 # Production Control System 
 PHPの学習成果物として、生産実績管理システムを作成しました。
   
-Herokuでデプロイしました。[PCS](https://pcs51.herokuapp.com/)【登録コード：1234/登録パスワード4321】
+Herokuでデプロイしました。[PCS](https://pcs51.herokuapp.com/login.php)【登録コード：1234/登録パスワード4321】
 
 ## 基本機能
 * 文章の投稿  
