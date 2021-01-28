@@ -95,6 +95,7 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
           </tr>
           <tr>
           <td>設備コード：<input type="text" name="machine_code" value="<?php print(htmlspecialchars($_POST['machine_code'], ENT_QUOTES)); ?>">
+		  <select><option>111</option></select>
           <?php if ($error['machine_code'] === 'blank'): ?>
 					<p class="error">* 設備コードを正しく入力してください</p>
 					<?php endif; ?>
