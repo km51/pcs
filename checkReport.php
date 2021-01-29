@@ -2,7 +2,7 @@
 session_start();
 require('dbconnect.php');
 
-ini_set('display_errors', 'on');
+ini_set('display_errors', 'off');
 
 $members = $db->prepare('SELECT * FROM members WHERE member_id=?');
 $members->execute(array($_SESSION['member_id']));
