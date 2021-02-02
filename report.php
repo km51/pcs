@@ -118,15 +118,15 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
           <td>生産日　　：<input type="text" name="production_date" value="<?php print(htmlspecialchars($_POST['production_date'], ENT_QUOTES)); ?>"> ※「20210126」のように入力</td>
           </tr>
           <tr>
-          <td>開始時刻　：<input type="text" name="start_hour" size="3" value="<?php print(htmlspecialchars($_POST['start_hour'], ENT_QUOTES)); ?>">：<input type="text" name="start_min" size="3" value="<?php print(htmlspecialchars($_POST['start_min'], ENT_QUOTES)); ?>"></td>
+          <td>開始時刻　：<input type="text" name="start_time" size="3" value="<?php print(htmlspecialchars($_POST['start_time'], ENT_QUOTES)); ?>"></td>
           </tr>
           <tr>
-          <td>終了時刻　：<input type="text" name="finish_hour" size="3" value="<?php print(htmlspecialchars($_POST['finish_hour'], ENT_QUOTES)); ?>">：<input type="text" name="finish_min" size="3" value="<?php print(htmlspecialchars($_POST['finish_min'], ENT_QUOTES)); ?>"></td>
+          <td>終了時刻　：<input type="text" name="finish_time" size="3" value="<?php print(htmlspecialchars($_POST['finish_time'], ENT_QUOTES)); ?>"></td>
           </tr>
-          <tr><td>休憩時間　：<input type="text" name="lunch_hour" size="3" value="<?php print(htmlspecialchars($_POST['lunch_hour'], ENT_QUOTES)); ?>">：<input type="text" name="lunch_min" size="3" value="<?php print(htmlspecialchars($_POST['lunch_min'], ENT_QUOTES)); ?>"></td>
+          <tr><td>休憩時間　：<input type="text" name="lunch_time" size="3" value="<?php print(htmlspecialchars($_POST['lunch_time'], ENT_QUOTES)); ?>"></td>
           </tr>
           <tr>
-          <td>停止時間　：<input type="text" name="breakdown_hour" size="3" value="<?php print(htmlspecialchars($_POST['breakdown_hour'], ENT_QUOTES)); ?>">：<input type="text" name="breakdown_min" size="3" value="<?php print(htmlspecialchars($_POST['breakdown_min'], ENT_QUOTES)); ?>"></td>
+          <td>停止時間　：<input type="text" name="breakdown_time" size="3" value="<?php print(htmlspecialchars($_POST['breakdown_time'], ENT_QUOTES)); ?>"></td>
           <!-- <td><button type="button">行削除</button></td> -->
           </tr>
           <tr>
