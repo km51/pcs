@@ -2,13 +2,12 @@
 session_start();
 require('dbconnect.php');
 
-ini_set('display_errors', 'on');
+ini_set('display_errors', 'off');
 
-if (!isset($_SESSION['join'])){
-	header('Location: index.php');
-	exit();
+$members = $db->prepare('SELECT * FROM members WHERE member_id=?');
+$members->execute(array($_SESSION['member_id']));
+$member = $members->fetch();
 
-}
 if(!empty($_POST)){
 	// if there is something in box
 	// DBへの登録について
@@ -26,9 +25,6 @@ if(!empty($_POST)){
 }
 
 //  check.phpは2回呼び出される。一つは、フォームに入力された時（このときには登録せず）、もう一つは、内容の確認場面で「登録する」ボタンを押した時
-$members = $db->prepare('SELECT * FROM members WHERE member_id=?');
-$members->execute(array($_SESSION['member_id']));
-$member = $members->fetch();
 
 
 
@@ -77,7 +73,7 @@ $member = $members->fetch();
 </nav>
 <div id="wrap">
 <div id="head">
-<h1><br><br>社員登録</h1>
+<h1><br><br>登録内容更新</h1>
 </div>
 
 <div id="content">
@@ -85,27 +81,28 @@ $member = $members->fetch();
 <form action="" method="post">
 	<input type="hidden" name="action" value="submit" />
 	<dl>
+		<dt>写真</dt>
+		<dd>
+		<!-- <?php if ($_SESSION['join']['image'] === ''){
+			// echo "<img src='./member_picture/".$member['member_picture']."'>";
+		// }else{
+			// echo "<img src='./member_picture/".$_SESSION['join']['image']."'>";
+		} ?> -->
+		<!-- <?php if($_SESSION['join']['image'] !== ''): ?> -->
+			<img src='./member_picture/<?php print(htmlspecialchars($_SESSION['join']['image'], ENT_QUOTES)); ?>'>
+		<!-- <?php endif; ?>	 -->
+		</dd>
 		<dt>名前</dt>
 		<dd>
 		<?php print(htmlspecialchars($_SESSION['join']['name'], ENT_QUOTES)); ?>
         </dd>
 
-		<!-- <dt>パスワード</dt>
-		<dd>
-		【表示されません】
-		</dd> -->
-		<dt>メールアドレス</dt>
+ 		<dt>メールアドレス</dt>
 		<dd>
 		<?php print(htmlspecialchars($_SESSION['join']['email'], ENT_QUOTES)); ?>
-        </dd>
-		<dt>写真など</dt>
-		<dd>
-		<?php if ($_SESSION['join']['image'] !== ''): ?>
-			<img src="member_picture/<?php print(htmlspecialchars($_SESSION['join']['image'], ENT_QUOTES)); ?>">
-		<?php endif; ?>
-		</dd>
+    </dd>
 	</dl>
-	<div><a href="update.php?action=rewrite">&laquo;&nbsp;書き直す</a> | <input type="submit" value="登録する" /></div>
+	<div><a href="update.php?action=rewrite">&laquo;&nbsp;書き直す</a> | <input type="submit" value="更新する" /></div>
 </form>
 </div>
 
