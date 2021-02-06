@@ -1,10 +1,11 @@
 # Production Control System 
 PHPの学習成果物として、とある製造工場における生産実績管理システムを作成しました（登録データはすべて架空です）。
   
-Herokuでデプロイしました。[PCS](https://pcs51.herokuapp.com/login.php)【登録コード：1234/登録パスワード4321】
+Herokuでデプロイしました。[PCS](https://pcs51.herokuapp.com/login.php)【登録コード：1111/登録パスワード1111】
 
 ## 基本機能
 * 生産実績（設備・生産品番・生産数・稼働時間等）の登録と閲覧
+* ゲストログイン機能
 * 作業時の気になる事項を共有  
 * 他の人の投稿に返信  
 * ユーザ登録  
@@ -13,7 +14,7 @@ Herokuでデプロイしました。[PCS](https://pcs51.herokuapp.com/login.php)
 * ログアウト  
 * ページネーション 
 * CSV出力
-*
+* 
 ## 環境  
 * 言語 : PHP 8.0.0
 * DB : MariaDB 10.4.17
