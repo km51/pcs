@@ -8,11 +8,13 @@ $members->execute(array($_SESSION['member_id']));
 $member = $members->fetch();
 
 if(!empty($_POST)){
-	$error=['name'=>'','image'=>'', 'email'=>''];
+
 	// check if get some information or not when submit button was pushed 
+
 	if ($_POST['name'] === ''){
 		$error['name'] = 'blank';
 	}
+
 	$fileName = $_FILES['image']['name'];
 	if(!empty($fileName)){
 		$ext = substr($fileName, -3);
@@ -22,89 +24,29 @@ if(!empty($_POST)){
 			}	
 	}	
 	if(empty($error)){
-		$member = $db->prepare('SELECT COUNT(*) AS cnt FROM members WHERE member_address=? AND member_id !=?');
-		$member->execute(array(
-			$_POST['email'],
-			$_SESSION['member_id']
-		));
-		$record = $member->fetch();
-		if ($record['cnt'] > 0){
-			$error['email'] = 'duplicate';
-		}
-	}
-	if(empty($error)){
-		$image = date('YmdHis') . $_FILES['image']['name'];
-		move_uploaded_file($_FILES['image']['tmp_name'], 'member_picture/' . $image);
-		$_SESSION['join'] = $_POST;
-		$_SESSION['join']['image'] = $image;
+		// $records = $db->prepare('SELECT COUNT(*) AS cnt FROM members WHERE member_address=? AND member_id !=?');
+		// $records->execute(array(
+		// 	$_POST['email'],
+		// 	$_SESSION['member_id']
+		// ));
+		// $record = $records->fetch();
 
-		header('Location: checkUpdate.php');
+		if($_POST['image'] !== ''){
+			$image = date('YmdHis').$_FILES['image']['name'];
+			move_uploaded_file($_FILES['image']['tmp_name'], 'member_picture/' . $image);
+			$_SESSION['join'] = $_POST;
+			$_SESSION['join']['image'] = $image;
+		}else{
+			$_SESSION['join']['image'] = $member['member_picture'];
+
+		}
+		header('Location: ./checkUpdate.php');
 		exit();
 	}
-
-
 }
-
-
-
-// if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()){
-//   $_SESSION['time'] = time();
-
-//   $members = $db->prepare('SELECT * FROM members WHERE id=?');
-//   $members->execute(array($_SESSION['id']));
-//   $member = $members->fetch();
-// }else{
-//   header('Location: login.php');
-//   exit();
-// }
-
-// if (!empty($_POST)){
-//   if ($_POST['message'] !== ''){
-//     $message = $db->prepare('INSERT INTO posts SET member_id=?, message=?, reply_message_id=?, created=now()');
-//     $message->execute(array(
-//       $member['id'],
-//       $_POST['message'],
-//       NULL
-//     ));
-// // 更新ボタン押下されても、メッセージが追加されないようにするため、メッセージの登録後に、自分自身をもう一度呼び出す
-//     header('Location: index.php');
-//     exit();
-//   }
-// }
-
-// $page = $_REQUEST['page'];
-// if($page == ''){
-//   $page = 1;
-// }
-// $page = max($page, 1);
-
-// $counts = $db->query('SELECT COUNT(*) AS cnt FROM posts');
-// $cnt = $counts->fetch();
-// $maxPage = ceil($cnt['cnt'] / 5);
-// $page = min($page, $maxPage);
-// if($page == 0){
-//   $page = 1;
-// }
-// $page = max($page, 1);
-
-
-// $start = ($page - 1) *5;
-
-// $posts = $db->prepare('SELECT m.name, m.picture, p.* FROM members m, posts p WHERE m.id=p.member_id ORDER BY p.created DESC LIMIT ?,5');
-// $posts->bindParam(1, $start, PDO::PARAM_INT);
-// $posts->execute();
-
-// if (isset($_REQUEST['res'])){
-//   // 返信の処理
-//   // 指定されたIDが存在するかどうかの確認→DBに問い合わせ
-//   $response = $db->prepare('SELECT m.name, m.picture, p.* FROM members m, posts p WHERE m.id=p.member_id AND p.id=?');
-//   $response->execute(array($_REQUEST['res']));
-
-//   $table = $response->fetch();
-//   $message = '@' . $table['name'] . ' ' . $table['message'];
-// } 
-
-
+if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
+	$_POST = $_SESSION['join'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -155,17 +97,18 @@ if(!empty($_POST)){
     <h1><br><br>マイページ編集画面</h1>
   </div>
   <div id="content">
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
       <dl>
 				<dt>写真：
 				<img src="member_picture/<?php print(htmlspecialchars($member['member_picture'], ENT_QUOTES)); ?>" width="128" height="170" alt="">
 				</dt>
-				<input type="file" name="image">
-				<?php if ($error['image'] === 'type'): ?>
-					<p class="error">* 写真などは「.gif」「.jpg」「.png」の画像を指定してください</p>
+				<dd>
+				<input type="file" name="image" value="test">
+					<?php if ($error['image'] === 'type'): ?>
+						<p class="error">* 写真などは「.gif」「.jpg」「.png」の画像を指定してください</p>
 					<?php endif; ?>
 				<br>
-
+				</dd>
 				<dt>名前（必須）：<input type="text" name="name" cols="15" rows="1" value="<?php 
         print(htmlspecialchars($member['member_name'], ENT_QUOTES)); 
         ?>"> さん</dt>
@@ -183,14 +126,8 @@ if(!empty($_POST)){
 
       
       </dl>
-      <div>
-        <p>
-          <input type="submit" value="更新" />
-        </p>
-      </div>
+      <div><input type="submit" value="更新" /></div>
     </form>
-    <a class="memo" href="index.php">TOPページに戻る</a>
-
   </div>
 </div>
 </body>

@@ -1,4 +1,4 @@
-<?php
+s<?php
 session_start();
 require('dbconnect.php');
 ini_set('display_errors', 'off');
@@ -7,6 +7,9 @@ $members = $db->prepare('SELECT * FROM members WHERE member_id=?');
 $members->execute(array($_SESSION['member_id']));
 $member = $members->fetch();
 
+$reports = $db->prepare('SELECT * FROM reports WHERE report_id=?');
+$reports->execute(array($_REQUEST['report_id']));
+$report = $reports->fetch();
 
 try {
   $sql = "SELECT * FROM breakdown";
@@ -49,7 +52,8 @@ if(!empty($_POST)){
 
   if(empty($error)){
     $_SESSION['join'] = $_POST;
-    header('Location: checkReport.php');
+    $_SESSION['report_id'] = $_REQUEST['report_id'];
+    header('Location: checkEditReport.php');
     exit();
   }
 }
@@ -106,18 +110,22 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
 </nav>
 
 <div id="wrap">
-    <h1><br><br>実績登録</h1>
+    <h1><br><br>実績編集</h1>
   <div id="content">
     <h4>実績入力（<span class="must">※</span>入力必須項目）</h4>
      <form action="" method="post">
         <table>
+          <tr>
+          <td>レポートNo.　　：<?php print(htmlspecialchars($_REQUEST['report_id'], ENT_QUOTES)); ?>
+          </td>
+          </tr>
           <tr>
           <td>社員コード　　　：<?php print(htmlspecialchars($member['member_code'], ENT_QUOTES)); ?>　　　名前　：<?php print(htmlspecialchars($member['member_name'],ENT_QUOTES)); ?>さん
           </td>
           </tr>
           <tr>
           <td>設備コード<span class="must">※</span>　　：<input type="text" id="search-text-machine" placeholder="設備コード入力" name="machine_code" 
-          value="<?php if ($error['machine_code'] === 'blank'){echo '';}else{print(htmlspecialchars($_POST['machine_code'], ENT_QUOTES));} ?>">
+          value="<?php if ($error['machine_code'] === 'blank'){echo '';}else{print(htmlspecialchars($report['machine_code'], ENT_QUOTES));} ?>">
           <input type="button" value="設備リスト表示切替" onclick="clickBtn1()" />
                      
           <div class="search-result-machine">
@@ -163,7 +171,7 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
         </td>
       </tr>
           <tr>
-            <td>品番コード<span class="must">※</span>　　：<input type="text" id="search-text-parts" placeholder="品番コード入力" name="parts_code" value="<?php if ($error['parts_code'] === 'blank'){echo '';}else{print(htmlspecialchars($_POST['parts_code'], ENT_QUOTES));} ?>">
+            <td>品番コード<span class="must">※</span>　　：<input type="text" id="search-text-parts" placeholder="品番コード入力" name="parts_code" value="<?php if ($error['parts_code'] === 'blank'){echo '';}else{print(htmlspecialchars($report['parts_code'], ENT_QUOTES));} ?>">
           <input type="button" value="品番リスト表示切替" onclick="clickBtn2()" />
           
           <div class="search-result-parts">
@@ -208,42 +216,44 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
           </td>
           </tr>
           <tr>
-          <td>生産数<span class="must">※</span>　　　　：<input type="text" name="production_num" value="<?php print(htmlspecialchars($_POST['production_num'], ENT_QUOTES)); ?>"></td><td>
+          <td>生産数<span class="must">※</span>　　　　：<input type="text" name="production_num" value="<?php print(htmlspecialchars($report['production_num'], ENT_QUOTES)); ?>"></td><td>
           <?php if ($error['production_num'] === 'blank'): ?>
 					<p class="error">* 生産数を入力してください</p>
 					<?php endif; ?>
           </td>
           </tr>
           <tr>
-          <td>生産日<span class="must">※</span>　　　　：<input type="date" name="production_date" value="<?php print(htmlspecialchars($_POST['production_date'], ENT_QUOTES)); ?>"></td><td>          
+          <td>生産日<span class="must">※</span>　　　　：<input type="date" name="production_date" value="<?php print(htmlspecialchars($report['production_date'], ENT_QUOTES)); ?>"></td><td>          
           <?php if ($error['production_date'] === 'blank'): ?>
 					<p class="error">* 生産日を入力してください</p>
 					<?php endif; ?> </td>
           </tr>
           <tr>
-          <td>開始時刻<span class="must">※</span>　　　：<input type="time" name = "start_time" value="<?php print(htmlspecialchars($_POST['start_time'], ENT_QUOTES)); ?>"></td><td>
+          <td>開始時刻<span class="must">※</span>　　　：<input type="time" name = "start_time" value="<?php print(htmlspecialchars($report['start_time'], ENT_QUOTES)); ?>"></td><td>
           <?php if ($error['start_time'] === 'blank'): ?>
 					<p class="error">* 開始時刻を入力してください</p>
 					<?php endif; ?>
           </td>
           </tr>
           <tr>
-          <td>終了時刻<span class="must">※</span>　　　：<input type="time" name = "finish_time" value="<?php print(htmlspecialchars($_POST['finish_time'], ENT_QUOTES)); ?>"></td><td>
+          <td>終了時刻<span class="must">※</span>　　　：<input type="time" name = "finish_time" value="<?php print(htmlspecialchars($report['finish_time'], ENT_QUOTES)); ?>"></td><td>
           <?php if ($error['finish_time'] === 'blank'): ?>
 					<p class="error">* 終了時刻を入力してください</p>
 					<?php endif; ?>
 
           </td>
           </tr>
-          <tr><td>休憩時間　　　　：<select name='lunch_time' value="<?php print(htmlspecialchars($_POST['lunch_time'], ENT_QUOTES)); ?>">
-          <?php 
-          for ($i = 0; $i <=16; $i++) {//この場合は32回目の17:00も必要なので$i<32ではなく$i<=32
-            $time = date("H:i", strtotime("+". $i * 15 ." minute",-3600*9));
-            $timeop .= "<option value =\"{$time}\">".$time."</option>\n";
-          }
-          // $timeop = htmlspecialchars($_POST['lunch_time'], ENT_QUOTES);
-          echo $timeop;
-           ?>
+          <tr><td>休憩時間　　　　：
+             <select name='lunch_time' value="<?php print(htmlspecialchars($report['lunch_time'], ENT_QUOTES)); ?>">
+             <?php 
+             $timeop = "";
+              for ($i = 0; $i <=16; $i++) {//この場合は32回目の17:00も必要なので$i<32ではなく$i<=32
+                $time = date("H:i", strtotime("+". $i * 15 ." minute",-3600*9));
+                $timeop .= "<option value =\"{$time}\">".$time."</option>\n";
+              }
+            echo $timeop;
+            ?>
+            
           </select></td>
           </tr>
           <tr>

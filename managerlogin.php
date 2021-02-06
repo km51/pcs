@@ -60,26 +60,28 @@ if (!empty($_POST)){
 	<div class="collapse navbar-collapse" id="navbarResponsive">
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item">
-        <a class="nav-link" href="login.php">ログイン</a>
+				<a class="nav-link" href="login.php">ログイン</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="managerlogin.php">管理者ログイン</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="register.php">登録</a>
       </li>
       <li class="nav-item">
-				<a class="nav-link" href="guestlogin.php">簡単ログイン</a>
+				<a class="nav-link" href="index.php">簡単ログイン</a>
 			</li>
 		</ul>
 	</div>
 </nav>
 <div id="wrap">
   <div id="head">
-    <h1><br><br>ログインする</h1>
+    <h1><br><br>管理者ログインする</h1>
   </div>
   <div id="content">
     <div id="lead">
       <p>社員コードとパスワードを記入してログインしてください。</p>
-      <p>社員登録がまだの方はこちらからどうぞ。</p>
-      <p>&raquo;<a href="register.php">社員登録をする</a></p>
+      <p>管理者登録がまだの方は、管理者に登録してもらってください。</p>
     </div>
     <form action="" method="post">
       <dl>
@@ -105,7 +107,7 @@ if (!empty($_POST)){
         </dd>
       </dl>
       <div>
-        <input type="submit" value="ログインする" />
+        <input type="submit" value="管理者ログインする" />
       </div>
       <br>
       <h4>※ パスワードを忘れた方はシステム課へ確認！</h4>

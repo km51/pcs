@@ -85,6 +85,7 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
 			<li class="nav-item">
 				<a class="nav-link" href="login.php">ログイン</a>
 			</li>
+
 			<li class="nav-item">
 				<a class="nav-link" href="register.php">登録</a>
       </li>
@@ -103,14 +104,14 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
 <p>次のフォームに必要事項をご記入ください。</p>
 <form action="" method="post" enctype="multipart/form-data">
 	<dl>
-		<dt>名前<span class="required">必須</span></dt>
+		<dt>名前<span class="required">（必須）</span></dt>
 		<dd>
         	<input type="text" name="name" size="35" maxlength="255" value="<?php print(htmlspecialchars($_POST['name'], ENT_QUOTES)); ?>" />
 					<?php if ($error['name'] === 'blank'): ?>
 					<p class="error">* 名前を入力してください</p>
 					<?php endif; ?>
 		</dd>
-		<dt>社員コード<span class="required">必須</span></dt>
+		<dt>社員コード<span class="required">（必須）</span></dt>
 		<dd>
         	<input type="text" name="code" size="35" maxlength="255" value="<?php print(htmlspecialchars($_POST['code'], ENT_QUOTES)); ?>" /> <!-- 他の項目に入力ミスがあったとき、すでに入力済みの項目はそのまま表示する -->
 					<?php if ($error['code'] === 'blank'): ?>
@@ -119,7 +120,7 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
 					<?php if ($error['code'] === 'duplicate'): ?>
 					<p class="error">* 指定された社員コードはすでに登録されています</p>
 					<?php endif; ?>
-		<dt>パスワード<span class="required">必須</span></dt>
+		<dt>パスワード<span class="required">（必須）</span></dt>
 		<dd>
         	<input type="password" name="password" size="10" maxlength="20" value="<?php print(htmlspecialchars($_POST['password'], ENT_QUOTES)); ?>" />
 					<?php if ($error['password'] === 'length'): ?>
@@ -139,14 +140,14 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
 					<p class="error">* パスワードを入力してください</p>
 					<?php endif; ?>
         </dd> -->
-    <dt>メールアドレス<span class="required"></span></dt>
+    <dt>メールアドレス<span class="required">※任意。登録してあるとパスワードリマインド機能を使用できます。</span></dt>
 		<dd>
         	<input type="text" name="email" size="35" maxlength="255" value="<?php print(htmlspecialchars($_POST['email'], ENT_QUOTES)); ?>" /> <!-- 他の項目に入力ミスがあったとき、すでに入力済みの項目はそのまま表示する -->
 
 					<?php if ($error['email'] === 'duplicate'): ?>
 					<p class="error">* 指定されたメールアドレスはすでに登録されています</p>
 					<?php endif; ?>
-		<dt>写真・画像</dt>
+		<dt>写真・画像※任意</dt>
 		<dd>
         	<input type="file" name="image" size="35" value="test"  />
 					<?php if ($error['image'] === 'type'): ?>

@@ -135,7 +135,7 @@ if (isset($_REQUEST['res'])){
     <h1><br><br>メモ</h1>
   </div>
   <div id="content">
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
       <dl>
         <dt>なにかありましたか？</dt>
         <dd>
@@ -147,22 +147,24 @@ if (isset($_REQUEST['res'])){
 
       </dl>
       <div>
-        <p>
-          <!-- <input type="file" name="photo" />
+           <input type="file" name="photo" enctype="multipart/form-data">
           <?php if ($error['photo'] === 'type'): ?>
 					<p class="error">* 写真などは「.gif」「.jpg」「.png」の画像を指定してください</p>
 					<?php endif; ?>
-          <br> -->
+          <br> 
           <input type="submit" value="共有する" />
-        </p>
       </div>
     </form>
 <?php foreach ($memos as $memo): ?>
     <div class="msg">
       <img class="member_picture" src="member_picture/<?php print(htmlspecialchars($memo['member_picture'], ENT_QUOTES)); ?>" width="48" height="48" />
       <span class="member_name"><?php print(htmlspecialchars($memo['member_name'], ENT_QUOTES)); ?>さん </span><p><?php print(htmlspecialchars($memo['memo_content'], ENT_QUOTES)); ?>
-      <!-- <img class="memo_photo" src="memo_photo/<?php print(htmlspecialchars($memo['memo_photo'], ENT_QUOTES)); ?>" width="48" height="48" /> -->
       
+      <?php if($memo['memo_photo'] !== NULL):?>
+        <img class="memo_photo" src="memo_photo/<?php print(htmlspecialchars($memo['memo_photo'], ENT_QUOTES)); ?>" width="100" height="100" />
+      
+      <?php endif; ?>
+
       [<a href="memo.php?res=<?php print(htmlspecialchars($memo['memo_id'], ENT_QUOTES)); ?>">Re</a>]</p>
       <p class="day"><a href="view.php?id="><?php print(htmlspecialchars($memo['created'], ENT_QUOTES)); ?></a>
 

@@ -37,8 +37,30 @@
 </div>
 
 <div id="content">
-<p>メールを送信しました</p>
+<p>メールを送信しました。※</p>
+<p>5分以内に届かない場合は再度送信するか、システム課に確認してください。</p>
 <p><a href="login.php">ログインする</a></p>
+
+※テスト中のため、実際にはメールは送信していません。
+<span id="view_today"></span>
+
+<script type="text/javascript">
+document.getElementById("view_today").innerHTML = getToday();
+
+function getToday() {
+	var now = new Date();
+	var year = now.getFullYear();
+	var mon = now.getMonth()+1; //１を足すこと
+	var day = now.getDate();
+	var you = now.getDay(); //曜日(0～6=日～土)
+
+	//曜日の選択肢
+	// var youbi = new Array("日","月","火","水","木","金","土");
+	//出力用
+	var s = "（" + year + "年" + mon + "月" + day + "日 現在）";
+	return s;
+}
+</script>
 </div>
 
 </div>
