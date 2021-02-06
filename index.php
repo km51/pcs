@@ -1,7 +1,7 @@
 <?php
 session_start();
 require('dbconnect.php');
-ini_set('display_errors', 'o');
+ini_set('display_errors', 'on');
 
 if (isset($_SESSION['member_id']) && $_SESSION['time'] + 3600 > time()){
   $_SESSION['time'] = time();
@@ -80,7 +80,7 @@ if (isset($_SESSION['member_id']) && $_SESSION['time'] + 3600 > time()){
 	<h1>～ Production Control System ～</h1>
 	<h3>以下の管理・共有ができます。</h3>
 	<div class="list">
-		<p>・生産実績登録　　　<a class="btn btn-outline-light btn-lg" href="report.php">実績登録</a></p>
+		<p>・生産実績の登録　　<a class="btn btn-outline-light btn-lg" href="report.php">実績登録</a></p>
 		<p>・過去実績の確認　　<a class="btn btn-outline-light btn-lg" href="list.php">実績確認</a></p>
 		<p>・作業時のメモ　　　<a class="btn btn-outline-light btn-lg" href="memo.php">メモ登録</a></p>
 	</div>

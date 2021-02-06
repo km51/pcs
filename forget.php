@@ -9,53 +9,25 @@ ini_set('display_errors', 'off');
 
 if(!empty($_POST)){
 	// check if get some information or not when submit button was pushed 
-	if ($_POST['name'] === ''){
-		$error['name'] = 'blank';
+	if ($_POST['member_code'] === ''){
+		$error['member_code'] = 'blank';
 	}
-	if ($_POST['email'] === ''){
-		$error['email'] = 'blank';
+	if ($_POST['member_address'] === ''){
+		$error['member_address'] = 'blank';
 	}
 	
-	if (strlen($_POST['password']) < 4){
-		$error['password'] = 'length';
-	}
-	if ($_POST['password'] === ''){
-		$error['password'] = 'blank';
-	}
-	$fileName = $_FILES['image']['name'];
-	if(!empty($fileName)){
-		$ext = substr($fileName, -3);
-
-		if ($ext != 'jpg' && $ext != 'gif' && $ext != 'png'){
-			$error['image'] = 'type';
-			}	
-	}	
 
 // アカウントの重複をチェック
 // blank等の確認がまず先↑
-	if(empty($error)){
-		$member = $db->prepare('SELECT COUNT(*) AS cnt FROM members WHERE email=?');
-		$member->execute(array($_POST['email']));
-		$record = $member->fetch();
-		if ($record['cnt'] > 0){
-			$error['email'] = 'duplicate';
-		}
-	}
 
 	if(empty($error)){
-		$image = date('YmdHis') . $_FILES['image']['name'];
-		move_uploaded_file($_FILES['image']['tmp_name'], '../member_picture/' . $image);
-		$_SESSION['join'] = $_POST;
-		$_SESSION['join']['image'] = $image;
+
 
 		header('Location: remind.php');
 		exit();
 	}
 }
 
-if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
-	$_POST = $_SESSION['join'];
-}
 ?>
 
 <!DOCTYPE html>
@@ -83,6 +55,9 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
 				<a class="nav-link" href="login.php">ログイン</a>
 			</li>
 			<li class="nav-item">
+				<a class="nav-link" href="managerlogin.php">管理者ログイン</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link" href="register.php">登録</a>
       </li>
       <li class="nav-item">
@@ -103,15 +78,15 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
 	<dl>
 		<dt>社員コード<span class="required">必須</span></dt>
 		<dd>
-        	<input type="text" name="name" size="35" maxlength="255" value="<?php print(htmlspecialchars($_POST['name'], ENT_QUOTES)); ?>" />
-					<?php if ($error['name'] === 'blank'): ?>
+        	<input type="text" name="member_code" size="35" maxlength="255" value="<?php print(htmlspecialchars($_POST['member_code'], ENT_QUOTES)); ?>" />
+					<?php if ($error['member_code'] === 'blank'): ?>
 					<p class="error">* 社員コードを入力してください</p>
 					<?php endif; ?>
 		</dd>
 		<dt>メールアドレス<span class="required">必須</span></dt>
 		<dd>
-        	<input type="text" name="email" size="35" maxlength="255" value="<?php print(htmlspecialchars($_POST['email'], ENT_QUOTES)); ?>" /> <!-- 他の項目に入力ミスがあったとき、すでに入力済みの項目はそのまま表示する -->
-					<?php if ($error['email'] === 'blank'): ?>
+        	<input type="text" name="member_address" size="35" maxlength="255" value="<?php print(htmlspecialchars($_POST['member_address'], ENT_QUOTES)); ?>" /> <!-- 他の項目に入力ミスがあったとき、すでに入力済みの項目はそのまま表示する -->
+					<?php if ($error['member_address'] === 'blank'): ?>
 					<p class="error">* メールアドレスを入力してください</p>
 					<?php endif; ?>
 		<dt>パスワード<span class="required">必須</span></dt>
