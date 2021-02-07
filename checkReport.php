@@ -172,6 +172,7 @@ if(!empty($_POST)){
 	<div><a href="report.php?action=rewrite">&laquo;&nbsp;書き直す</a> 　| 　<input id = "submit" type="submit" value="実績登録する" /></div>
 </div>
 </form>
+	<script src="js/jquery-3.3.1.min.js"></script>
 
 </body>
 </html>
