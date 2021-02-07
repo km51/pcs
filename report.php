@@ -338,5 +338,7 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 <script type="text/javascript" src="js/instant.js"></script>
 	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>
