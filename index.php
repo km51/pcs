@@ -89,6 +89,6 @@ if (isset($_SESSION['member_id']) && $_SESSION['time'] + 3600 > time()){
 	<h4><br>生産性向上に向けて、情報を共有しましょう！</h4>
 </div>
 
-
+<script src="js/jquery-3.3.1.min.js"></script>
 </body>
 </html>
