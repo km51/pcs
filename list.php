@@ -200,5 +200,7 @@ $part = $parts->fetch();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/extras/jquery.metadata.min.js">
 <script type="text/javascript" src="./js/tablesorter.js"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
+	<script src="bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>
