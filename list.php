@@ -199,5 +199,6 @@ $part = $parts->fetch();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/extras/jquery.metadata.min.js">
 <script type="text/javascript" src="./js/tablesorter.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
 </body>
 </html>
