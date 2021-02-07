@@ -197,5 +197,6 @@ if (isset($_REQUEST['res'])){
 </ul>
   </div>
 </div>
+	<script src="js/jquery-3.3.1.min.js"></script>
 </body>
 </html>
