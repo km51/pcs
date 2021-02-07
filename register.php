@@ -164,5 +164,6 @@ if($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])){
 	<div>>>すでに登録されている方は<a href="login.php">ログイン画面</a>へ</div>
 </form>
 </div>
+	<script src="js/jquery-3.3.1.min.js"></script>
 </body>
 </html>
