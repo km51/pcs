@@ -116,5 +116,6 @@ if (!empty($_POST)){
     <!-- <p><img src="images/txt_copyright.png" width="136" height="15" alt="" /></p> -->
   </div>
 </div>
+<script src="js/jquery-3.3.1.min.js"></script>
 </body>
 </html>
